@@ -1,0 +1,13 @@
+diff --git a/arch/arm/boot/dts/qcom/msm8953-potter.dtsi b/arch/arm/boot/dts/qcom/msm8953-potter.dtsi
+index 2506e9e1d524..7b39453fc519 100644
+--- a/arch/arm/boot/dts/qcom/msm8953-potter.dtsi
++++ b/arch/arm/boot/dts/qcom/msm8953-potter.dtsi
+@@ -957,6 +957,8 @@
+ 			status = "ok";
+ 			reg = <0x1000 0x100>;
+ 			compatible = "qcom,leds-atc";
++			linux,default-trigger = "default-on";
++			qcom,default-state = "on";
+ 			linux,name = "charging";
+ 			qcom,ctrl-reg = <0x243>;
+ 		};

@@ -3,6 +3,7 @@
 , stdenv
 , hostPlatform
 , fetchFromGitHub
+, fetchpatch
 , kernelPatches ? [] # FIXME
 , dtbTool
 }:
@@ -33,7 +34,6 @@ in
     rev = "80530de6e297dd0f0ba479c0dcc4ddb7c9e90e24"; # lineage-15.1
     sha256 = "0qw8x61ycpkk5pqvs9k2abr5lq56ga5dml6vkygvmi8psm2g6kg1";
   };
-
   patches = [
     ./04_fix_camera_msm_isp.patch
     ./05_misc_msm_fixes.patch
@@ -43,6 +43,12 @@ in
     ./0005-Allow-building-with-sound-disabled.patch
     ./0006-Fix-missing-include-in-epl8802-driver.patch
     ./0007-switch-mmc1-card-detect-sense.patch
+    (fetchpatch {
+      name = "illuminate-let-at-boot.patch";
+      url = "https://github.com/samueldr/linux/commit/8314883fa52672d353d1caf23d332492e0e10e13.patch";
+      sha256 = "10dkjwlg2sv41h8z9jsdkzsb7v1vvsmg7pyvv9g212g1jpcz13ra";
+    })
+    ./0008-led-defaults-on-in-device-tree.patch
   ];
 
   isModular = false;
