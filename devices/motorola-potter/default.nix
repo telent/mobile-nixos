@@ -31,6 +31,7 @@
       offset_tags = "0x00000100";
       pagesize = "2048";
     };
+    appendDt = "qcom/sdm625-motorola-potter.dtb";
   };
 
   # The boot partition on this phone is 16MB, so use `xz` compression
@@ -38,14 +39,22 @@
 
   mobile.boot.stage-1.compression = lib.mkDefault "xz";
 
-  mobile.usb.mode = "android_usb";
-  # Google
-  mobile.usb.idVendor = "18D1";
-  # "Nexus 4"
-  mobile.usb.idProduct = "D001";
+  mobile.usb = {
+    mode = "gadgetfs";
+
+    # Google
+    idVendor = "18D1";
+    # "Nexus 4"
+    idProduct = "D001";
+
+    gadgetfs.functions = {
+#    rndis = "rndis_bam.rndis";
+    adb = "ffs.adb";
+    };
+  };
 
   mobile.system.type = "android";
-
+  mobile.boot.stage-1.fail.delay = 3600;
   mobile.quirks.qualcomm = {
     wcnss-wlan.enable = true;
   };

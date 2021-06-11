@@ -7,12 +7,15 @@ in stdenv.mkDerivation rec {
   version = "la.um.6.6.r1-V2_1";
   # lk2nd ships its own copy of mkbootimg, which needs python
   nativeBuildInputs = [ dtc dtbTool python ];
-  buildInputs = [ cstdenv.cc ];
+  depsBuildBuild = [ cstdenv.cc ];
   preConfigure = ''
   substituteInPlace make/build.mk --replace scripts/dtbTool ${dtbTool}/bin/dtbTool
   patchShebangs scripts/mkbootimg
   '';
-  patches = [ ./fix-dprintf.patch ];
+  patches = [
+    ./fix-dprintf.patch
+    ./potter-p3b-board-id.patch
+  ];
   src = fetchurl {
     url = "https://github.com/SirSireesh/lk2nd/archive/e3ad85f97261b09fa7fa226950a45bead630fadf.tar.gz";
     sha256 = "0a47if9a02v97ql5pm514xjsp08b30vhfr596vd2h3rb9ckkwhg8";
@@ -22,8 +25,9 @@ in stdenv.mkDerivation rec {
   ls -l build-${project}
   cp build-${project}/lk2nd.img build-${project}/lk.bin $out/lib
   '';
-  makeFlags = [ "TOOLCHAIN_PREFIX=arm-none-eabi-"
+  makeFlags = [ "TOOLCHAIN_PREFIX=${cstdenv.cc.targetPrefix}"
                 "NOECHO="
+                "OSVERSION_IN_BOOTIMAGE=1"
                 project];
   
 }

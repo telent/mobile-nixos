@@ -1,0 +1,14 @@
+diff --git a/dts/msm8953-motorola-potter.dts b/dts/msm8953-motorola-potter.dts
+index 6d5f0cdc..739ab6b1 100644
+--- a/dts/msm8953-motorola-potter.dts
++++ b/dts/msm8953-motorola-potter.dts
+@@ -14,7 +14,8 @@
+ 			<0x45 0x82a0>,
+ 			<0x45 0x82a2>,
+ 			<0x45 0x82b2>,
+-			<0x46 0x83a0>;
++			<0x46 0x83a0>,
++			<0x46 0x83b0>;
+ 
+ 	model = "Motorola Moto G5 Plus (potter)";
+ 	compatible = "motorola,potter", "qcom,msm8953", "lk2nd,device";
