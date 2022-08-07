@@ -22,5 +22,6 @@ mobile-nixos.kernel-builder {
 
 #  enableRemovingWerror = true;
   isModular = true;
-  isQcdt = true;
+  isQcdt = false;
+  needsAppendedFdt = "dtbs/qcom/sdm625-motorola-potter.dtb";
 }
