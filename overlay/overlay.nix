@@ -146,4 +146,22 @@ in
     };
 
     imageBuilder = callPackage ../lib/image-builder {};
+
+    dtimgextract = self.stdenv.mkDerivation {
+      pname = "dtimgextract";
+      version = "1";
+      src = self.fetchFromGitHub {
+        owner = "s0be";
+        repo = "dtimgextract";
+        rev = "db133c13a9c5b4c2e0511a22a400e0600baa75af";
+        hash = "sha256-8Iblu7QGYDA9hM5CIKVMcy1y8ZUrXZhEwH+uDqtFuko=";
+      };
+      preConfigure = "rm dtimgextract";
+      makeFlags = [ "CC=gcc"  "all" ];
+      installPhase = ''
+        mkdir -p $out/bin
+        cp dtimgextract $out/bin
+      '';
+    };
+
  }
